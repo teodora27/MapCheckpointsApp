@@ -398,3 +398,6 @@ FodyWeavers.xsd
 *.sln.iml
 backend/yarn.lock
 backend/.env
+frontend/package-lock.json
+frontend/package.json
+frontend/README.md
