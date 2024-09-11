@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Map, {Popup} from 'react-map-gl';
 import {Marker} from 'react-map-gl';
 import {Room} from "@material-ui/icons";
+import "./App.css";
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -35,15 +36,23 @@ function App() {
           <Room style={{fontSize:viewport.zoom*6, color: "rgb(222, 49, 99)"}}/> 
         </Marker> 
 
-        <Popup 
+        {/* <Popup 
           latitude={47}
           longitude={2} 
           offset={[2,-20]}
           anchor="left"
           // onClose={() => setShowPopup(false)}
           >
-          <div>You here</div>
-      </Popup>
+          <div className='card'>
+          <label>Name</label>
+            <h4 className='name'>Center of France</h4>
+          <label>Description</label>
+            <p className='desc'>10/10 must visit as soon as possible</p>
+          <label>Information: </label>
+          <span className='username'>Created by <b>Teo</b></span>
+          <span className='date'> 1 hour ago</span>
+          </div>
+      </Popup> */}
 
 
       </Map> 
