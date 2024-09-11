@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Map from 'react-map-gl';
+import Map, {Popup} from 'react-map-gl';
 import {Marker} from 'react-map-gl';
 import {Room} from "@material-ui/icons";
-
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -26,17 +25,27 @@ function App() {
         onMove={(evt) => setViewport(evt.viewState)}
         //onViewportChange={nextViewport => setViewport(nextViewport)}
       
-      
       >
-        
         <Marker
           latitude={47} 
           longitude={2} 
           //offset={[-3.5 * viewState.latitude,-7 * viewport.zoom]}
           anchor="bottom"
         >
-          <Room /> 
+          <Room style={{fontSize:viewport.zoom*6, color: "rgb(222, 49, 99)"}}/> 
         </Marker> 
+
+        <Popup 
+          latitude={47}
+          longitude={2} 
+          offset={[2,-20]}
+          anchor="left"
+          // onClose={() => setShowPopup(false)}
+          >
+          <div>You here</div>
+      </Popup>
+
+
       </Map> 
     </div>
   );
