@@ -10,6 +10,7 @@ import {format} from "timeago.js";
 function App() {
   const currentUser="ana_blandiana";
 
+  const [newPlace, setNewPlace] = useState(null);
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [viewport, setViewport] = useState({
@@ -17,6 +18,7 @@ function App() {
     longitude: 2,
     zoom: 4,
   });
+
 
   React.useEffect(()=>{
     const getPins = async()=>{
@@ -34,6 +36,15 @@ function App() {
     setCurrentPlaceId(id);
     // setViewport({ ...viewport, latitude: lat, longitude: long });
   };
+  const handleAddClick = (e) => {
+    const [longitude, latitude] = e.lngLat.toArray();
+    console.log(e.lngLat);
+    setNewPlace({
+      lat: latitude,
+      long: longitude,
+    });
+  };
+
 
   return (
     <div className="App"style={{ width: '50vw', height: '100vh'}}>
@@ -49,7 +60,8 @@ function App() {
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
         onMove={(evt) => setViewport(evt.viewState)}
         //onViewportChange={nextViewport => setViewport(nextViewport)}
-      
+        
+        onDblClick={handleAddClick}
       >
 
         {pins.map(p=>(
@@ -94,6 +106,23 @@ function App() {
 
         </React.Fragment>
         ))}
+
+
+        {newPlace ?(
+          
+          <Popup 
+            latitude={newPlace.lat}
+            longitude={newPlace.long} 
+            offset={[2,-20]}
+            closeOnClick={false}  
+            closeOnMove={false}  
+            onClose={() => setCurrentPlaceId(null)}
+            anchor="left"
+            >
+            hello
+            </Popup> 
+
+          ): null }
 
       </Map> 
     </div>
