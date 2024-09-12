@@ -403,3 +403,4 @@ frontend/package.json
 frontend/README.md
 frontend/.env
 frontend/yarn.lock
+yarn.lock
