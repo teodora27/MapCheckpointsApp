@@ -7,6 +7,7 @@ import "./App.css";
 import axios from "axios";
 import {format} from "timeago.js";
 import Register from './components/Register';
+import Login from './components/Login';
 
 function App() {
   const [currentUser,setCurrentUser]=useState(null);
@@ -15,6 +16,8 @@ function App() {
   const [desc, setDesc] = useState(null);
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [viewport, setViewport] = useState({
     latitude: 47,
     longitude: 2,
@@ -195,13 +198,20 @@ function App() {
         ):(
 
         <div className='buttons'>        
-          <button className="button login" >Log in</button>          
-          <button className="button register">Register</button>          
+          <button className="button login" onClick={() => setShowLogin(true)}>Log in</button>          
+          <button className="button register"onClick={() => setShowRegister(true)}>Register</button>          
         </div>
 
         )}
-
-        <Register></Register>
+        {showRegister ?(
+         <Register setShowRegister={setShowRegister}></Register> 
+        ):null}
+        {showLogin ?(
+         <Login
+         setShowLogin={setShowLogin}
+         ></Login>
+        ):null}
+        
 
       </Map> 
     </div>
