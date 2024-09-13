@@ -10,6 +10,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 
 function App() {
+  const myStorage = window.localStorage;
   const [currentUser,setCurrentUser]=useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [name, setName] = useState(null);
@@ -90,6 +91,10 @@ function App() {
     } catch (err) {
       console.log(err);
     }
+  };
+  const handleLogout = () => {
+    setCurrentUser(null);
+    myStorage.removeItem("user");
   };
 
   return (
@@ -187,13 +192,10 @@ function App() {
 
           ): null }
 
-        {/* <button className="button logout" onClick={handleLogout}>Log out</button>          
-        <button className="button login" onClick={() => setShowLogin(true)}>Log in</button>          
-        <button className="button register"onClick={() => setShowRegister(true)}>Register</button>           */}
-
+      
         {currentUser ?(
 
-        <button className="button logout">Log out</button>  
+        <button className="button logout"onClick={handleLogout}>Log out</button>  
 
         ):(
 
@@ -209,6 +211,8 @@ function App() {
         {showLogin ?(
          <Login
          setShowLogin={setShowLogin}
+         setCurrentUsername={setCurrentUser}
+         myStorage={myStorage}
          ></Login>
         ):null}
         
