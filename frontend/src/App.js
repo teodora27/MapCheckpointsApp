@@ -11,6 +11,8 @@ function App() {
   const currentUser="ana_blandiana";
 
   const [newPlace, setNewPlace] = useState(null);
+  const [name, setName] = useState(null);
+  const [desc, setDesc] = useState(null);
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
   const [viewport, setViewport] = useState({
@@ -68,7 +70,24 @@ function App() {
       long: longitude,
     });
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPin = {
+      username: currentUser,
+      name,
+      desc,
+      lat: newPlace.lat,
+      long: newPlace.long,
+    };
 
+    try {
+      const res = await axios.post("/pins", newPin);
+      setPins([...pins, res.data]);
+      setNewPlace(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="App"style={{ width: '50vw', height: '100vh'}}>
@@ -145,17 +164,17 @@ function App() {
             >
             
             <div>
-              <form>
+              <form onSubmit={handleSubmit}>
               <label>Name</label>
                 <input
                   placeholder="Enter the name"
                   // autoFocus
-                  // onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                 />
               <label>Description</label>
                 <textarea
                   placeholder="Say us something about this place."
-                  // onChange={(e) => setDesc(e.target.value)}
+                  onChange={(e) => setDesc(e.target.value)}
                 />
               <button type="submit" className="submitButton">Add Pin</button>
               </form>
