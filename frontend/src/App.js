@@ -6,10 +6,10 @@ import {Room} from "@material-ui/icons";
 import "./App.css";
 import axios from "axios";
 import {format} from "timeago.js";
+import Register from './components/Register';
 
 function App() {
-  const currentUser="ana_blandiana";
-
+  const [currentUser,setCurrentUser]=useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [name, setName] = useState(null);
   const [desc, setDesc] = useState(null);
@@ -183,6 +183,25 @@ function App() {
             </Popup> 
 
           ): null }
+
+        {/* <button className="button logout" onClick={handleLogout}>Log out</button>          
+        <button className="button login" onClick={() => setShowLogin(true)}>Log in</button>          
+        <button className="button register"onClick={() => setShowRegister(true)}>Register</button>           */}
+
+        {currentUser ?(
+
+        <button className="button logout">Log out</button>  
+
+        ):(
+
+        <div className='buttons'>        
+          <button className="button login" >Log in</button>          
+          <button className="button register">Register</button>          
+        </div>
+
+        )}
+
+        <Register></Register>
 
       </Map> 
     </div>
