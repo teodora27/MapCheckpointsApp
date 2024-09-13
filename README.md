@@ -10,6 +10,7 @@
 
 3. **Step 3**:  
    🎉 **Make an account and enjoy!** 🍕 🎮 🍹
+   
    **P.S.** To add a pin, just double-click on the map! 📍🗺️
 
 ---
