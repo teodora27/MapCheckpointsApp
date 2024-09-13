@@ -31,10 +31,34 @@ function App() {
     };
     getPins()
   },[]);
+  const flyToViewport = (lat, long) => {
+    let step = 0;
+    const steps = 25; // Number of steps in the transition
+    const startLat = viewport.latitude;
+    const startLong = viewport.longitude;
+  
+    const animateFly = () => {
+      step += 1;
+      const progress = step / steps;
+      
+      setViewport(prev => ({
+        ...prev,
+        latitude: startLat + (lat - startLat) * progress,
+        longitude: startLong + (long - startLong) * progress
+      }));
+  
+      if (step < steps) {
+        requestAnimationFrame(animateFly);
+      }
+    };
+  
+    animateFly();
+  };
 
-  const handleMarkerClick = (id) => {
+  const handleMarkerClick = (id,lat,long) => {
     setCurrentPlaceId(id);
-    // setViewport({ ...viewport, latitude: lat, longitude: long });
+    flyToViewport(lat, long);
+    //setViewport({ ...viewport, latitude: lat, longitude: long });
   };
   const handleAddClick = (e) => {
     const [longitude, latitude] = e.lngLat.toArray();
@@ -60,8 +84,8 @@ function App() {
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
         onMove={(evt) => setViewport(evt.viewState)}
         //onViewportChange={nextViewport => setViewport(nextViewport)}
-        
         onDblClick={handleAddClick}
+        
       >
 
         {pins.map(p=>(
@@ -74,7 +98,7 @@ function App() {
           anchor="bottom"
           >
           <Room style={{fontSize:viewport.zoom*7, color: p.username===currentUser? "rgb(222, 49, 99)":"rgb(0,0,256)", cursor: "pointer"}}
-          onClick={() => handleMarkerClick(p._id)}
+          onClick={() => handleMarkerClick(p._id, p.lat,p.long)}
           /> 
 
 
@@ -116,10 +140,27 @@ function App() {
             offset={[2,-20]}
             closeOnClick={false}  
             closeOnMove={false}  
-            onClose={() => setCurrentPlaceId(null)}
+            onClose={() => setNewPlace(null)}
             anchor="left"
             >
-            hello
+            
+            <div>
+              <form>
+              <label>Name</label>
+                <input
+                  placeholder="Enter the name"
+                  // autoFocus
+                  // onChange={(e) => setTitle(e.target.value)}
+                />
+              <label>Description</label>
+                <textarea
+                  placeholder="Say us something about this place."
+                  // onChange={(e) => setDesc(e.target.value)}
+                />
+              <button type="submit" className="submitButton">Add Pin</button>
+              </form>
+            </div>
+
             </Popup> 
 
           ): null }
