@@ -11,7 +11,7 @@ import Login from './components/Login';
 
 function App() {
   const myStorage = window.localStorage;
-  const [currentUser,setCurrentUser]=useState(null);
+  const [currentUser,setCurrentUser]=useState(myStorage.getItem("user"));
   const [newPlace, setNewPlace] = useState(null);
   const [name, setName] = useState(null);
   const [desc, setDesc] = useState(null);
@@ -171,7 +171,7 @@ function App() {
             anchor="left"
             >
             
-            <div>
+            <div className='card'>
               <form onSubmit={handleSubmit}>
               <label>Name</label>
                 <input
