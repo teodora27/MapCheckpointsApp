@@ -9,9 +9,11 @@
    `yarn start` ⚡
 
 3. **Step 3**:  
-   🎉 **Make an account and enjoy!** 🍕 🎮 🍹  
+   🎉 **Make an account and enjoy!** 🍕 🎮 🍹
+   **P.S.** To add a pin, just double-click on the map! 📍🗺️
 
 ---
 
 Happy coding! 🎨✨
+
 ![image](https://github.com/user-attachments/assets/32190319-158a-4d28-bfff-609b4192993f)
