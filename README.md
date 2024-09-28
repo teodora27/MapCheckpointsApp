@@ -12,7 +12,7 @@
    🎉 **Make an account and enjoy!** 🍕 🎮 🍹
    
    **P.S.** To add a pin, just double-click on the map! 📍🗺️
-   -> u can see the database at cloud.mongodb.com
+   (Note for me: u can see the database at cloud.mongodb.com)
 
 ---
 
